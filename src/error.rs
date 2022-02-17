@@ -16,6 +16,12 @@ pub enum TelemError {
     Base40Decode,
     CrcError,
     CobsError,
+
+    // Config related
+    CfgParse(String),       // contains JSON configuration parse error 
+    CfgRead(String),        // contains IO error 
+    PkgTypeNotFound(usize), // contains the requested package type
+    FieldNotFound(String),  // contains the name of the requested field
 }
 
 impl fmt::Display for TelemError {
@@ -38,6 +44,10 @@ impl fmt::Display for TelemError {
                                                   of bytes is {} and the package length is {}", 
                                                   TELEMETRY_MIN_BYTES, n),
             TelemError::CobsError => write!(f, "COBS error, failed to decode bytes"),
+            TelemError::PkgTypeNotFound(id) => write!(f, "Invalid package type. Got id: {id}"),
+            TelemError::FieldNotFound(field_name) => write!(f, "Field {field_name} not found in package config"),
+            TelemError::CfgParse(err) => write!(f, "Failed to parse JSON configuration: {err}"),
+            TelemError::CfgRead(err) => write!(f, "Failed to read JSON configuration: {err}"),
         }
     }
 }

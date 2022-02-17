@@ -1,0 +1,61 @@
+{
+  "pkgs": [
+    {
+      "name": "telemetry",
+      "number_fields": 10,
+      "id": 2004318071,
+      "fields": [
+        {
+          "name": "date",
+          "index": 4,
+          "ty": "Base40Str"
+        },
+        {
+          "name": "time",
+          "index": 5,
+          "ty": "Base40Str"
+        },
+        {
+          "name": "millisecond",
+          "index": 6,
+          "ty": "UInt32"
+        },
+        {
+          "name": "mission id",
+          "index": 7,
+          "ty": "Base40Str"
+        },
+        {
+          "name": "latitude",
+          "index": 8,
+          "ty": "Float32"
+        },
+        {
+          "name": "longitude",
+          "index": 9,
+          "ty": "Float32"
+        },
+        {
+          "name": "altitude",
+          "index": 10,
+          "ty": "Float32"
+        },
+        {
+          "name": "heading",
+          "index": 11,
+          "ty": "Float32"
+        },
+        {
+          "name": "battery V",
+          "index": 12,
+          "ty": "Float32"
+        },
+        {
+          "name": "battery I",
+          "index": 13,
+          "ty": "Float32"
+        }
+      ]
+    }
+  ]
+}
