@@ -9,12 +9,12 @@ use serde_derive::{Deserialize, Serialize};
 use std::fs;
 use std::error::Error;
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Config {
     pub pkgs: Vec<PacketType>,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct PacketType {
     pub name: String,
     pub id: usize,
@@ -22,7 +22,7 @@ pub struct PacketType {
     pub fields: Vec<Field>,
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Field {
     pub name: String,
     pub index: usize,

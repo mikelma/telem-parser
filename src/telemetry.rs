@@ -3,9 +3,9 @@ use crate::*;
 use serde_derive::{Serialize, Deserialize};
 
 #[derive(Debug)]
-pub struct TelemetryPacket<'a> {
+pub struct TelemetryPacket {
     data: Vec<u8>,
-    cfg: &'a PacketType,
+    cfg: PacketType,
 }
 
 #[derive(Debug, Clone)]
@@ -24,8 +24,8 @@ pub enum TelemFieldType {
     Base40Str,
 }
 
-impl<'a> TelemetryPacket<'a> {
-    pub fn from(mut bytes: Vec<u8>, config: &'a Config) -> Result<Self, TelemError> {
+impl TelemetryPacket {
+    pub fn from(mut bytes: Vec<u8>, config: &Config) -> Result<Self, TelemError> {
         if bytes.len() < TELEMETRY_MIN_BYTES {
             return Err(TelemError::MissingBytes(bytes.len()));
         }
@@ -41,9 +41,11 @@ impl<'a> TelemetryPacket<'a> {
             _ => unreachable!(),
         };
 
+        let cfg_ty = config.get_type(type_id as usize)?;
+
         let pkg = TelemetryPacket {
             data: bytes,
-            cfg: config.get_type(type_id as usize)?,
+            cfg: (*cfg_ty).clone(),
         };
 
         pkg.check_package()?;
