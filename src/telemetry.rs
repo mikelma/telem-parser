@@ -53,6 +53,10 @@ impl TelemetryPacket {
         Ok(pkg)
     }
 
+    pub fn get_raw(&self) -> &[u8] {
+        &self.data
+    }
+
     fn check_package(&self) -> Result<(), TelemError> {
         let n_fields = match Self::read_field_raw(&self.data, TELEMETRY_FIELD_COUNT, TelemFieldType::UInt32)? {
             TelemField::UInt32(v) => v,
